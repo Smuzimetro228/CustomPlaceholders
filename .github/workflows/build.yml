@@ -11,9 +11,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-          cache: maven
-      - run: mvn -B clean package
+      - name: Unzip project
+        run: unzip -o CustomPlaceholders.zip
+      - name: Build
+        run: mvn -B clean package
+        working-directory: CustomPlaceholders
       - uses: actions/upload-artifact@v4
         with:
           name: CustomPlaceholders
-          path: target/*.jar
+          path: CustomPlaceholders/target/*.jar
